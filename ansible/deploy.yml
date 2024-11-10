@@ -1,0 +1,38 @@
+---
+- name: Deploy React App with Docker
+  hosts: web_servers
+  become: yes
+  vars:
+    docker_image_name: "talhahussain71x/react-app"
+    docker_tag: "latest"
+    container_name: "react-app"
+
+  tasks:
+    - name: Ensure Docker is installed
+      apt:
+        name: docker.io
+        state: present
+        update_cache: yes
+
+    - name: Pull Docker image from Docker Hub
+      docker_image:
+        name: "{{ docker_image_name }}"
+        tag: "{{ docker_tag }}"
+        source: pull
+
+    - name: Stop and remove any existing container with the same name
+      docker_container:
+        name: "{{ container_name }}"
+        state: absent
+
+    - name: Run the Docker container
+      docker_container:
+        name: "{{ container_name }}"
+        image: "{{ docker_image_name }}:{{ docker_tag }}"
+        state: started
+        restart_policy: always
+        published_ports:
+          - "80:80"
+        environment:
+          NODE_ENV: "production"
+
