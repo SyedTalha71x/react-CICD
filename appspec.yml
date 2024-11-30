@@ -1,17 +1,28 @@
 version: 0.0
 os: linux
+
 files:
-  - source: /index.html
-    destination: /var/www/html/
+  - source: /
+    destination: /home/ubuntu/server
+permissions:
+  - object: /
+    pattern: "**"
+    owner: ubuntu
+    group: ubuntu
+
 hooks:
+
   BeforeInstall:
-    - location: scripts/install_dependencies
+    - location: scripts/before_install.sh
       timeout: 300
       runas: root
-    - location: scripts/start_server
+
+  AfterInstall:
+    - location: scripts/after_install.sh
       timeout: 300
       runas: root
-  ApplicationStop:
-    - location: scripts/stop_server
+
+  ApplicationStart:
+    - location: scripts/app_start.sh
       timeout: 300
       runas: root
