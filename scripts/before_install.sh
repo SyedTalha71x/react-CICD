@@ -1,9 +1,11 @@
 #!/bin/bash
 
-curl -sL https://deb.nodesource.com/setup_18.x -o nodesource_setup.sh
-sudo bash nodesource_setup.sh
+# Add NodeSource repository for Node.js 18.x
+curl -sL https://rpm.nodesource.com/setup_18.x | sudo bash -
 
-sudo apt update
-sudo apt install -y nodejs npm
+# Update the system and install Node.js
+sudo yum update -y
+sudo yum install -y nodejs
 
+# Install PM2 globally
 sudo npm install -g pm2
