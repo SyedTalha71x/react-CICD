@@ -4,7 +4,7 @@ const LandingPage: React.FC = () => {
   return (
     <div style={styles.container}>
       <h1 style={styles.heading}>
-        CI/CD Automation Setup for React Application with AWS Codepipeline
+        CI/CD Automation Setup for React App with AWS Cloud Codepipeline
       </h1>
     </div>
   );
