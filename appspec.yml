@@ -3,7 +3,7 @@ os: linux
 
 files:
   - source: /
-    destination: /home/ubuntu/server
+    destination: /home/ec2-user/server
 permissions:
   - object: /
     pattern: "**"
@@ -11,7 +11,6 @@ permissions:
     group: ec2-user
 
 hooks:
-
   BeforeInstall:
     - location: scripts/before_install.sh
       timeout: 300
